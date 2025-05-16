@@ -1,0 +1,39 @@
+buildscript {
+    // Adicione esta seção para definir a versão do Kotlin
+    ext.kotlin_version = '1.8.20'  // Versão específica que resolve o aviso
+    
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        // É provável que você já tenha uma linha semelhante a esta
+        classpath 'com.android.tools.build:gradle:7.3.0'  // Use sua versão atual, se diferente
+        
+        // Adicione esta linha para especificar a versão do plugin Kotlin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        
+        // Mantenha quaisquer outras dependências que você já tenha aqui
+    }
+}
+
+// Esta é a parte que você compartilhou
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}

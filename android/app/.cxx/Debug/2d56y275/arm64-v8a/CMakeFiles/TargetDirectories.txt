@@ -1,0 +1,2 @@
+C:/forkslabs/tformulas/android/app/.cxx/Debug/2d56y275/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/forkslabs/tformulas/android/app/.cxx/Debug/2d56y275/arm64-v8a/CMakeFiles/rebuild_cache.dir

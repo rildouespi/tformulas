@@ -1,0 +1,1 @@
+C:\forkslabs\tformulas\build\app\intermediates\cxx\RelWithDebInfo\61423t1l\obj\arm64-v8a

@@ -4,6 +4,8 @@ import 'theme_provider.dart';
 import 'pages/formulas_fisica.dart';
 import 'pages/formulas_quimica.dart';
 import 'pages/formulas_matematica.dart';
+import 'pages/formulas_biologia.dart'; // Novo import para a página de Biologia
+import 'utils/version_check.dart'; // Adicionado import para a verificação de versão
 
 void main() {
   runApp(
@@ -16,9 +18,13 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
+    // Verificar versão após carregar o app
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      VersionCheck.checkVersion(context);
+    });
+    
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
         return MaterialApp(
@@ -36,6 +42,7 @@ class MyApp extends StatelessWidget {
             '/formulas_fisica': (context) => const FormulasFisicas(),
             '/formulas_quimica': (context) => const FormulasQuimica(),
             '/formulas_matematica': (context) => const FormulasMatematica(),
+            '/formulas_biologia': (context) => const FormulasBiologia(), // Nova rota para Biologia
           },
         );
       },
@@ -45,11 +52,9 @@ class MyApp extends StatelessWidget {
 
 class TodasFormulas extends StatelessWidget {
   const TodasFormulas({super.key});
-
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -74,6 +79,7 @@ class TodasFormulas extends StatelessWidget {
           _buildCategoryButton(context, 'Física', '/formulas_fisica'),
           _buildCategoryButton(context, 'Química', '/formulas_quimica'),
           _buildCategoryButton(context, 'Matemática', '/formulas_matematica'),
+          _buildCategoryButton(context, 'Biologia', '/formulas_biologia'), // Novo botão para Biologia
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -81,14 +87,14 @@ class TodasFormulas extends StatelessWidget {
           height: 50,
           alignment: Alignment.center,
           child: Text(
-            'v1.0.10\nForksLabs ${DateTime.now().year}',
+            'v1.0.10\nForksLabs ${DateTime.now().year}', // Atualizei a versão de 1.0.10 para 1.0.11
             textAlign: TextAlign.center,
           ),
         ),
       ),
     );
   }
-
+  
   Widget _buildCategoryButton(
       BuildContext context, String title, String route) {
     return ListTile(
